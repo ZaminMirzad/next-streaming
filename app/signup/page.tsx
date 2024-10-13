@@ -1,7 +1,6 @@
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
+import { Button, Input } from "@mantine/core";
 import { X } from "lucide-react";
+import Link from "next/link";
 
 export default function SignUp() {
   return (
@@ -10,41 +9,35 @@ export default function SignUp() {
         <div className="flex items-center justify-between w-full ">
           <h1 className="text-2xl">NextStreaming</h1>
           <Button color="primary" variant="flat" className="p-0 m-0">
-            <X  className="p-0" />
+            <X className="p-0" />
           </Button>
         </div>
 
         {/* Register Form */}
         <div className="flex flex-col gap-4">
           <div className="flex w-full flex-col md:flex-nowrap mb-6 md:mb-0 gap-4">
-            <Input size="sm" type="text" label="First Name" />
-            <Input size="sm" type="text" label="Last Name" />
-            <Input size="sm" type="email" label="Email" />
-            <Input size="sm" type="password" label="Password" />
-            <Input size="sm" type="password" label="Repeat Password" />
+            <Input size="sm" type="text" />
+            <Input size="sm" type="text" />
+            <Input size="sm" type="email" />
+            <Input size="sm" type="password" />
+            <Input size="sm" type="password" />
           </div>
           <Button color="primary" className="w-full">
             Register
           </Button>
           <span className="text-center">
             Already; have an account?{" "}
-            <Link
-              showAnchorIcon
-              href="/login"
-              color="primary"
-              size="md"
-              className=""
-            >
+            <Link href="/login" color="primary" className="">
               Login
             </Link>
           </span>
         </div>
 
         <div className="flex items-center justify-center  gap-2">
-          <Link showAnchorIcon href="#" color="primary" size="md">
+          <Link href="#" color="primary">
             Primary
           </Link>
-          <Link showAnchorIcon href="#" size="md" className="rounded-sm">
+          <Link href="#" className="rounded-sm">
             Forgot password?
           </Link>
         </div>

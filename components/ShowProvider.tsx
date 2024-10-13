@@ -37,7 +37,7 @@ export default function ShowProviders() {
                       logo_path
                     }
                     height={20}
-                    alt="Norway"
+                    alt={provider_name}
                     className="  min-w-40 h-20  w-40 object-contain object-center aspect-auto "
                   />
                 </Card.Section>

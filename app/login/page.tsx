@@ -1,7 +1,6 @@
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import { X } from "lucide-react";
+import { Button, Input } from "@mantine/core";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -17,31 +16,25 @@ export default function Login() {
         {/* login Form */}
         <div className="flex flex-col gap-4">
           <div className="flex w-full flex-col md:flex-nowrap mb-6 md:mb-0 gap-4">
-            <Input size="sm" type="email" label="Email" />
-            <Input size="sm" type="password" label="Password" />
+            <Input size="sm" type="email" />
+            <Input size="sm" type="password" />
           </div>
           <Button color="primary" className="w-full">
             Login
           </Button>
           <span className="text-center">
             Don&apos; have an account?{" "}
-            <Link
-              showAnchorIcon
-              href="signup"
-              color="primary"
-              size="md"
-              className=""
-            >
+            <Link href="signup" color="primary" className="">
               Create Account
             </Link>
           </span>
         </div>
 
         <div className="flex items-center justify-center  gap-2">
-          <Link showAnchorIcon href="#" color="primary" size="md">
+          <Link href="#" color="primary">
             Primary
           </Link>
-          <Link showAnchorIcon href="#" size="md" className="rounded-sm">
+          <Link href="#" className="rounded-sm">
             Forgot password?
           </Link>
         </div>
