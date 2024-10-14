@@ -27,18 +27,19 @@ export default function ShowProviders() {
                 shadow="sm"
                 padding="lg"
                 radius="md"
-                className=" max-w-40 min-w-40 w-full h-20 mx-3 hover:-translate-y-3 hover:translate-x-2 hover:cursor-pointer transition duration-300 group-hover:scale-90"
+                className="border-0  overflow-hidden max-w-24 min-w-40 w-full h-20 mx-3 flex items-center justify-center hover:-translate-y-3 hover:translate-x-2 hover:cursor-pointer transition duration-300 group-hover:scale-90"
               >
                 <Card.Section>
                   <Image
                     src={
                       process.env.NEXT_PUBLIC_IMAGE_BASE_URL +
-                      "original" +
+                      "w185" +
                       logo_path
                     }
                     height={20}
                     alt={provider_name}
-                    className="  min-w-40 h-20  w-40 object-contain object-center aspect-auto "
+                    loading="lazy"
+                    className="border-0  h-full  w-full object-contain object-center aspect-video "
                   />
                 </Card.Section>
               </Card>

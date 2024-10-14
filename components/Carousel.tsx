@@ -3,9 +3,12 @@
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
-import { Badge } from "@mantine/core";
+import { Badge, Button } from "@mantine/core";
 import classes from "./carousel.module.css";
 import { useZuStore } from "@/store/zuStore";
+import { IconPlayerPlayFilled } from "@tabler/icons-react";
+import { BookmarkIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function CarouselComponent() {
   const autoplay = useRef(Autoplay({ delay: 3500 }));
@@ -23,14 +26,15 @@ export default function CarouselComponent() {
         ({ id, backdrop_path, title, name, media_type, overview }) => {
           return (
             <Carousel.Slide key={id} className="relative">
-              <img
+              <Image
                 src={
                   process.env.NEXT_PUBLIC_IMAGE_BASE_URL +
                   "original" +
                   backdrop_path
                 }
-                alt=""
+                alt={title || name}
                 className=" w-full object-cover"
+                loading="lazy"
               />
               <div className="absolute w-full bottom-0 left-0 right-0  h-full text-white bg-opacity-50 bg-gradient-to-t from-black to-transparent px-10 pb-20 flex flex-col  justify-end">
                 <div className=" max-w-3xl h-52 p-2 mb-20">
@@ -41,6 +45,17 @@ export default function CarouselComponent() {
                   )}
                   <h1 className="text-4xl pb-4">{title || name}</h1>
                   <p className=" text-gray-300">{overview}</p>
+                  <div className="flex gap-4 items-center mt-4">
+                    <Button
+                      variant="light"
+                      rightSection={<IconPlayerPlayFilled />}
+                    >
+                      Play
+                    </Button>
+                    <Button variant="light" rightSection={<BookmarkIcon />}>
+                      Add to Whishlist
+                    </Button>
+                  </div>
                 </div>
               </div>
             </Carousel.Slide>

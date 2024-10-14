@@ -1,9 +1,10 @@
 "use client";
 
 import { Bell, LogOut, Search } from "lucide-react";
-import { ActionIcon, Button, Flex, Anchor as Link } from "@mantine/core";
+import { ActionIcon, Button, Flex, Anchor, Group } from "@mantine/core";
 
 import { useZuStore } from "@/store/zuStore";
+import Link from "next/link";
 
 export default function Header() {
   const { user, updateUser } = useZuStore((state) => state);
@@ -15,29 +16,53 @@ export default function Header() {
         className="flex items-center justify-between gap-10"
       >
         {/* Logo Section */}
-        <Link href="/" className=" text-lg lg:text-2xl xl:text-2xl">
+        <Anchor
+          component={Link}
+          href="/"
+          className=" text-lg lg:text-2xl xl:text-2xl text-white"
+          variant="text-white"
+        >
           NextStreaming
-        </Link>
+        </Anchor>
 
         {/* Navigation Section */}
         <div className=" text-white flex-1 justify-center  flex items-center">
-          <Flex className="hidden sm:hidden md:flex lg:flex xl:flex items-center gap-4 list-none">
+          <Group
+            justify="center"
+            className="hidden sm:hidden md:flex lg:flex xl:flex items-center gap-4 list-none text-white"
+          >
             <li className="">
-              <Link href="/">Home</Link>
+              <Anchor component={Link} href="/">
+                Home
+              </Anchor>
             </li>
             <li className="">
-              <Link href="/">Discover</Link>
+              <Anchor component={Link} href="/">
+                Discover
+              </Anchor>
+            </li>
+            <li className="text-white">
+              <Button
+                variant="light"
+                color="white"
+                component={"a"}
+                className="text-white"
+                href="/m"
+              >
+                Movie Release
+              </Button>
             </li>
             <li className="">
-              <Link href="/">Movie Release</Link>
+              <Anchor component={Link} href="/">
+                Forum
+              </Anchor>
             </li>
             <li className="">
-              <Link href="/">Forum</Link>
+              <Anchor component={Link} href="/">
+                About
+              </Anchor>
             </li>
-            <li className="">
-              <Link href="/">About</Link>
-            </li>
-          </Flex>
+          </Group>
         </div>
 
         {/* Auth Section */}
