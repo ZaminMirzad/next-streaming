@@ -35,6 +35,7 @@ export default function CarouselComponent() {
                 alt={title || name}
                 className=" w-full object-cover"
                 loading="lazy"
+                fill
               />
               <div className="absolute w-full bottom-0 left-0 right-0  h-full text-white bg-opacity-50 bg-gradient-to-t from-black to-transparent px-10 pb-20 flex flex-col  justify-end">
                 <div className=" max-w-3xl h-52 p-2 mb-20">
