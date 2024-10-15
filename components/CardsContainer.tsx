@@ -9,19 +9,21 @@ import { ListProps } from "@/store/zuStore";
 
 export interface CarouselProps {
   containerTitle: string;
+  isTransparent?: boolean;
   containerList: ListProps[] | null;
 }
 
 export default function CardsContainer({
   containerTitle,
   containerList,
+  isTransparent,
 }: CarouselProps) {
   //   const autoplay = useRef(Autoplay({ delay: 3500 }));
   //   const { trendings } = useZuStore((state) => state);
 
   return (
     containerList && (
-      <Flex className="flex flex-col gap-4 w-full  py-10 pl-10 bg-black relative">
+      <Flex className={`${isTransparent && 'bg-transparent'} "flex flex-col gap-4 w-full  py-10 pl-10 bg-black relative"`}>
         <h1 className="text-2xl font-bold text-main capitalize">
           {containerTitle}
         </h1>
@@ -41,6 +43,7 @@ export default function CardsContainer({
               first_air_date,
             }) => (
               <Carousel.Slide
+              
                 key={id}
                 className=" max-w-56 group hover:-translate-y-2 hover:translate-x-2 hover:cursor-pointer transition duration-300 border rounded-lg border-main bg-main/50 mx-4 mt-4 w-full group hover:scale-105"
               >
