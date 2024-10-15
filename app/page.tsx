@@ -2,13 +2,15 @@
 
 import CardsContainer from "@/components/CardsContainer";
 import CarouselComponent from "@/components/Carousel";
+import CustomCarousel from "@/components/CustomCarousel";
+
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ShowProviders from "@/components/ShowProvider";
 import { useZuStore } from "@/store/zuStore";
 
 export default function Home() {
-  const { popular, upcoming } = useZuStore((state) => state);
+  const { popular, upcoming, trendings } = useZuStore((state) => state);
   return (
     <main className="w-screen h-screen relative overflow-x-hidden bg-black">
       <Header />
@@ -19,13 +21,14 @@ export default function Home() {
         <ShowProviders />
         <CardsContainer
           containerTitle="Popular Movies"
-          containerList={popular}
-        />
-        <CardsContainer
-          containerTitle="Soon In Theathers"
           containerList={upcoming}
         />
       </div>
+      <CustomCarousel slides={popular} />
+      <CardsContainer
+        containerTitle="Soon In Theathers"
+        containerList={trendings}
+      />
 
       <Footer />
     </main>
