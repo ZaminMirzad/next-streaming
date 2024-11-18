@@ -1,7 +1,13 @@
 "use client";
 
 import { Bell, LogOut, Search } from "lucide-react";
-import { ActionIcon, Button, Flex, Anchor, Group } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Flex,
+  Group,
+  UnstyledButton,
+} from "@mantine/core";
 
 import { useZuStore } from "@/store/zuStore";
 import Link from "next/link";
@@ -10,20 +16,15 @@ export default function Header() {
   const { user, updateUser } = useZuStore((state) => state);
 
   return (
-    <div className=" px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-4 w-full dark:text-white text-black sticky top-0 z-50 backdrop-blur-sm bg-black/10">
+    <div className=" px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-4 w-full max-h-16 dark:text-white text-black sticky top-0 z-[999] backdrop-blu bg-gradient-to-b from-black/60 to-transparent ">
       <Flex
         direction={{ base: "row" }}
-        className="flex items-center justify-between gap-10"
+        className="flex items-center justify-between gap-10 text-white"
       >
         {/* Logo Section */}
-        <Anchor
-          component={Link}
-          href="/"
-          className=" text-lg lg:text-2xl xl:text-2xl text-white"
-          variant="text-white"
-        >
+        <UnstyledButton component={Link} fz={24} href="/">
           NextStreaming
-        </Anchor>
+        </UnstyledButton>
 
         {/* Navigation Section */}
         <div className=" text-white flex-1 justify-center  flex items-center">
@@ -32,35 +33,29 @@ export default function Header() {
             className="hidden sm:hidden md:flex lg:flex xl:flex items-center gap-4 list-none text-white"
           >
             <li className="">
-              <Anchor component={Link} href="/">
+              <UnstyledButton component={Link} href="/">
                 Home
-              </Anchor>
+              </UnstyledButton>
             </li>
             <li className="">
-              <Anchor component={Link} href="/">
+              <UnstyledButton component={Link} href="/">
                 Discover
-              </Anchor>
+              </UnstyledButton>
             </li>
-            <li className="text-white">
-              <Button
-                variant="light"
-                color="white"
-                component={"a"}
-                className="text-white"
-                href="/m"
-              >
+            <li>
+              <UnstyledButton component={Link} href="/m">
                 Movie Release
-              </Button>
+              </UnstyledButton>
             </li>
             <li className="">
-              <Anchor component={Link} href="/">
+              <UnstyledButton component={Link} href="/">
                 Forum
-              </Anchor>
+              </UnstyledButton>
             </li>
             <li className="">
-              <Anchor component={Link} href="/">
+              <UnstyledButton component={Link} href="/">
                 About
-              </Anchor>
+              </UnstyledButton>
             </li>
           </Group>
         </div>
@@ -74,7 +69,7 @@ export default function Header() {
                 <ActionIcon
                   size="lg"
                   variant="light"
-                  color="primary"
+                  color="white"
                   radius="full"
                   className="border-0 "
                 >
@@ -83,7 +78,7 @@ export default function Header() {
                 <ActionIcon
                   size="lg"
                   variant="light"
-                  color="primary"
+                  color="white"
                   radius="full"
                   className="border-0 py-2 "
                 >
@@ -99,8 +94,8 @@ export default function Header() {
                   }}
                 /> */}
                 <ActionIcon
-                  size="lg"
-                  variant="light"
+                  variant=""
+                  color="red"
                   radius="sm"
                   className="border-0 dark:text-white"
                   onClick={() => updateUser()}
@@ -116,21 +111,29 @@ export default function Header() {
             <div className="flex items-center gap-4 text-white">
               <ActionIcon
                 size="lg"
-                variant="ghost"
+                variant="light"
                 color="primary"
                 radius="full"
                 className="border-0"
               >
                 <Search className=" w-5" />
               </ActionIcon>
-              <Button size="sm" variant="ghost" className="text-white">
+              <Button
+                component={Link}
+                size="sm"
+                variant="light"
+                color="primary"
+                className="text-white"
+                href="/signup"
+              >
                 Sign up
               </Button>
               <Button
                 size="sm"
-                variant="flat"
-                color="primary"
-                onClick={() => updateUser()}
+                variant=""
+                color="red"
+                component={Link}
+                href="/login"
               >
                 Login
               </Button>
