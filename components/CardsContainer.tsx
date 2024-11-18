@@ -5,6 +5,7 @@ import { Card, Flex, Image } from "@mantine/core";
 // import Autoplay from "embla-carousel-autoplay";
 import classes from "./carousel.module.css";
 import { ListProps } from "@/store/zuStore";
+import { useRouter } from "next/navigation";
 // import { useRef } from "react";
 
 export interface CarouselProps {
@@ -20,15 +21,23 @@ export default function CardsContainer({
 }: CarouselProps) {
   //   const autoplay = useRef(Autoplay({ delay: 3500 }));
   //   const { trendings } = useZuStore((state) => state);
+  const router = useRouter();
+  const navigateToDetails = (id: string) => {
+    router.push(`/movie/${id}`);
+  };
 
   return (
     containerList && (
-      <Flex className={`${isTransparent && 'bg-transparent'} "flex flex-col gap-4 w-full  py-10 pl-10 bg-black relative"`}>
+      <Flex
+        className={`${
+          isTransparent && "bg-transparent"
+        } "flex flex-col gap-4 w-full  py-10 pl-10 bg-black relative"`}
+      >
         <h1 className="text-2xl font-bold text-main capitalize">
           {containerTitle}
         </h1>
         <Carousel
-          className="   pt-2 min-h-96"
+          className="pt-2 min-h-96"
           classNames={classes}
           slideSize="33.333333%"
           align="start"
@@ -43,9 +52,9 @@ export default function CardsContainer({
               first_air_date,
             }) => (
               <Carousel.Slide
-              
                 key={id}
                 className=" max-w-56 group hover:-translate-y-2 hover:translate-x-2 hover:cursor-pointer transition duration-300 border rounded-lg border-main bg-main/50 mx-4 mt-4 w-full group hover:scale-105"
+                onClick={() => navigateToDetails(id)}
               >
                 <Card
                   shadow="sm"
@@ -69,7 +78,7 @@ export default function CardsContainer({
 
                   <div className="absolute bottom-0 left-0 right-0  h-full z-20 bg-black/50 text-white p-1 w-full opacity-0 group-hover:opacity-100 flex transition-opacity duration-500 items-center justify-center  ">
                     <div className=" text-center relative h-full w-full flex items-center justify-center flex-col">
-                      <h1 className=" line-clamp-1 text-lg ">
+                      <h1 className=" line-clamp-2 text-lg ">
                         {title || name}
                       </h1>
                       <span className="absolute top-0 right-0 rounded p-1 bg-main/20 px-3">

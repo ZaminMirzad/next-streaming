@@ -21,11 +21,12 @@ export default function CarouselComponent() {
       plugins={[autoplay.current]}
       onMouseEnter={autoplay.current.stop}
       onMouseLeave={autoplay.current.reset}
+      translate="yes"
     >
       {trendings?.map(
         ({ id, backdrop_path, title, name, media_type, overview }) => {
           return (
-            <Carousel.Slide key={id} className="relative">
+            <Carousel.Slide key={id} className="relative ">
               <Image
                 src={
                   process.env.NEXT_PUBLIC_IMAGE_BASE_URL +
@@ -37,7 +38,7 @@ export default function CarouselComponent() {
                 loading="lazy"
                 fill
               />
-              <div className="absolute w-full bottom-0 left-0 right-0  h-full text-white bg-opacity-50 bg-gradient-to-t from-black to-transparent px-10 pb-20 flex flex-col  justify-end">
+              <div className="absolute w-full bottom-0 left-0 right-0  h-full text-white bg-opacity-50 bg-gradient-to-t from-black to-transparent px-10 pb-36 flex flex-col  justify-end">
                 <div className=" max-w-3xl h-52 p-2 mb-20">
                   {media_type && (
                     <Badge color="red" className=" mb-2 uppercase">

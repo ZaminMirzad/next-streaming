@@ -1,4 +1,3 @@
-import { CarouselProps } from "@/components/CardsContainer";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -12,16 +11,44 @@ export interface ListProps {
   release_date: string;
   first_air_date: string;
   overview: string;
+  vote_average: number;
+  genre_ids: number[];
+  runtime: number;
+  popularity: number;
+  genres: { id: number; name: string }[];
+  credits: { cast: any[]; crew: any[] };
+  similar: { results: ListProps[] | null };
+}
+
+export interface ProvidersProps {
+  logo_path: string;
+  provider_id: number;
+  provider_name: string;
+  display_priority: number;
+}
+
+export interface CastProps{
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string;
+}
+
+export interface GenreProps{
+  id: number;
+  name: string;
 }
 
 interface NextStreamingState {
   user: boolean;
-  providers: [] | null;
+  providers: ProvidersProps[] | null;
   trendings: ListProps[] | null;
   popular: ListProps[] | null;
   upcoming: ListProps[] | null;
   updateUser: () => void;
   execute: () => void;
+  movie: ListProps | null;
+  getMovie: (id: string) => void;
 }
 
 export const useZuStore = create<NextStreamingState>()(
@@ -32,7 +59,17 @@ export const useZuStore = create<NextStreamingState>()(
       trendings: null,
       popular: null,
       upcoming: null,
+      movie: null,
       updateUser: () => set({ user: !get().user }),
+
+      // get a movie by id
+      getMovie: async (id: string) => {
+        await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=credits,reviews,similar`
+        )
+          .then((res) => res.json())
+          .then((data) => set({ movie: data }));
+      },
       execute: async () => {
         // trendings
         let trendingRes = await fetch(

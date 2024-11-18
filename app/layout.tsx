@@ -4,6 +4,7 @@ import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import "./globals.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import Header from "@/components/Header";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -32,7 +33,10 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <Header />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

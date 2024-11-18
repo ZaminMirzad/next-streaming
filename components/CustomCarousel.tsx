@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 "use client";
 
 import { ListProps } from "@/store/zuStore";
+import {  getGenreSpans } from "@/utils/utils";
 import { Button } from "@mantine/core";
+import { IconStarFilled } from "@tabler/icons-react";
+import moment from "moment";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -70,16 +74,16 @@ export default function CustomCarousel({ slides }: CustomCarouselProps) {
 
   return (
     <div
-      className="relative w-full h-full mb-44 overflow-hidden object-contain max-h-[80%] transition-all duration-700"
+      className="relative w-full h-full mb-10 overflow-hidden object-contain max-h-[80%] transition-all duration-700"
       style={{
         backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}original${slides?.[currentIn].backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute top-0 left-0 right-0 bottom-0 h-full w-full bg-black/80 z-50">
+      <div className="absolute top-0 left-0 right-0 bottom-0 h-full w-full bg-gradient-to-tr from-black to-transparent z-50">
         <div className="flex  justify-between items-center gap-6 h-full p-10">
-          <div className="flex flex-col gap-6 max-w-xl text-white">
+          <div className="flex flex-col gap-6 max-w-xl text-white transition-all duration-700">
             <h1 className="text-white text-3xl font-bold mb-10">
               Featured ON NEXT STREAMING
             </h1>
@@ -88,6 +92,33 @@ export default function CustomCarousel({ slides }: CustomCarouselProps) {
               <h1 className="text-white/80 text-3xl font-bold">
                 {slides?.[currentIn].title || slides?.[currentIn].name}
               </h1>
+              <p className="flex items-center text-sm gap-2">
+                <span className="flex items-center text-sm gap-1">
+                  <span className="text-white/50">
+                    <IconStarFilled color="yellow" size={18} />
+                  </span>
+                  {slides?.[currentIn].vote_average?.toPrecision(2)}
+                </span>
+                <span className="text-white/50">Released: </span>
+                {moment(slides?.[currentIn].release_date).format("YYYY") ||
+                  moment(slides?.[currentIn].first_air_date).format("YYYY")}
+
+                <span className="flex items-center text-sm gap-2">
+                  <span className="text-white/50">Genre: </span>
+                  {getGenreSpans(slides?.[currentIn].genre_ids!)?.map(
+                    (genre) => {
+                      return (
+                        <span
+                          key={genre.id}
+                          className="text-white border border-main/50 bg-main/30 px-1 text-xs rounded-sm"
+                        >
+                          {genre.name}
+                        </span>
+                      );
+                    }
+                  )}
+                </span>
+              </p>
               <p className="mt-4 text-white/70 h-40 line-clamp-6">
                 {slides?.[currentIn].overview}
               </p>
@@ -96,7 +127,13 @@ export default function CustomCarousel({ slides }: CustomCarouselProps) {
               <Button color="primary" variant="flat">
                 Watch Now
               </Button>
-              <Button color="primary" variant="flat" className="ml-2">
+              <Button
+                component="a"
+                href={`/movie/${slides?.[currentIn].id}`}
+                color="primary"
+                variant="flat"
+                className="ml-2"
+              >
                 More Info
               </Button>
             </div>
