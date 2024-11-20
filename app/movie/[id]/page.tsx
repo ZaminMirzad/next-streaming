@@ -5,6 +5,7 @@ import CardsContainer from "@/components/CardsContainer";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import { CastProps, GenreProps, ListProps, useZuStore } from "@/store/zuStore";
 import { Badge, Button } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import {
   BookmarkPlus,
   Clock,
@@ -18,6 +19,7 @@ import { useEffect } from "react";
 export default function Page({ params }: { params: { id: string } }) {
   const { movie, getMovie } = useZuStore((state) => state);
   const paramid = params.id;
+  const videoKey = movie?.videos?.results?.filter((video) => video.type === "Trailer")?.[0]?.key;
 
   useEffect(() => {
     getMovie(paramid);
@@ -35,13 +37,36 @@ export default function Page({ params }: { params: { id: string } }) {
     }
   );
 
+  // console.log(process.env.NEXT_PUBLIC_VIDEO_BASE_URL + videoKey);
+
+
+  // handle play
+  const handlePlay = () => modals.open({
+    radius: 'lg',
+    padding: '0',
+    size: 'xl',
+    centered: true,
+    withCloseButton: false,
+    children: (
+      movie ? <div className="w-full h-[490px] ">
+        <iframe width="100%" height="100%" className="h-full w-full ratio ratio-16x9  "
+          src={`${process.env.NEXT_PUBLIC_VIDEO_BASE_URL}${videoKey}?controls=0&autoplay=1&rel=0&Showinfo=0&cc_load_policy=1`}
+          title={movie?.title || movie?.name}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+        />
+      </div> : <div className="w-full h-[484px] flex items-center justify-center">
+        No video found
+      </div>
+    ),
+  });
+
   return (
     <div className="w-screen h-screen   bg-black -mt-16 overflow-x-hidden relative overflow-y-auto">
       <div className=" h-full w-full  bg-gradient-to-t from-black to-transparent   max-h-[700px] ">
         <div className="p-4  w-full  h-full flex items-end justify-start absolute top-0 left-0 right-0 bottom-0 z-0 ">
           <ImageWithLoader
             src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}original${movie?.backdrop_path}`}
-            alt={movie?.title! || movie?.name!}
+            alt={movie?.title! || movie?.name! || "Movie Image"}
             height={700}
           />
         </div>
@@ -79,7 +104,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
           <div className="flex items-center justify-between  gap-4 w-full ">
             <div className="flex items-center gap-4 ">
-              <Button variant="" color="red" size="md" radius="md">
+              <Button variant="" color="red" size="md" radius="md" onClick={() => handlePlay()}>
                 <Play size={18} className="mx-2" /> Play Now
               </Button>
               <Button variant="light" size="sm" color="teal" radius="md">
