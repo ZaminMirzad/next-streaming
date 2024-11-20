@@ -18,6 +18,7 @@ export interface ListProps {
   genres: { id: number; name: string }[];
   credits: { cast: any[]; crew: any[] };
   similar: { results: ListProps[] | null };
+  videos: { results: VideosProps[] | null };
 }
 
 export interface ProvidersProps {
@@ -27,14 +28,14 @@ export interface ProvidersProps {
   display_priority: number;
 }
 
-export interface CastProps{
+export interface CastProps {
   id: number;
   name: string;
   character: string;
   profile_path: string;
 }
 
-export interface GenreProps{
+export interface GenreProps {
   id: number;
   name: string;
 }
@@ -51,6 +52,20 @@ interface NextStreamingState {
   getMovie: (id: string) => void;
 }
 
+// videos interface
+export interface VideosProps {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  type: string;
+  official: boolean;
+  published_at: string;
+  size: number;
+}
+
 export const useZuStore = create<NextStreamingState>()(
   persist(
     (set, get) => ({
@@ -65,7 +80,7 @@ export const useZuStore = create<NextStreamingState>()(
       // get a movie by id
       getMovie: async (id: string) => {
         await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=credits,reviews,similar`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=credits,reviews,similar,videos`
         )
           .then((res) => res.json())
           .then((data) => set({ movie: data }));
