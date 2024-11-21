@@ -3,15 +3,14 @@
 
 import CardsContainer from "@/components/CardsContainer";
 import ImageWithLoader from "@/components/ImageWithLoader";
+import { VideoModal } from "@/components/VideoModal";
 import { CastProps, GenreProps, ListProps, useZuStore } from "@/store/zuStore";
 import { Badge, Button } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import {
   BookmarkPlus,
   Clock,
   Download,
   Network,
-  Play,
   ThumbsUp,
 } from "lucide-react";
 import { useEffect } from "react";
@@ -39,26 +38,6 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // console.log(process.env.NEXT_PUBLIC_VIDEO_BASE_URL + videoKey);
 
-
-  // handle play
-  const handlePlay = () => modals.open({
-    radius: 'lg',
-    padding: '0',
-    size: 'xl',
-    centered: true,
-    withCloseButton: false,
-    children: (
-      movie ? <div className="w-full h-[490px] ">
-        <iframe width="100%" height="100%" className="h-full w-full ratio ratio-16x9  "
-          src={`${process.env.NEXT_PUBLIC_VIDEO_BASE_URL}${videoKey}?controls=0&autoplay=1&rel=0&Showinfo=0&cc_load_policy=1`}
-          title={movie?.title || movie?.name}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-        />
-      </div> : <div className="w-full h-[484px] flex items-center justify-center">
-        No video found
-      </div>
-    ),
-  });
 
   return (
     <div className="w-screen h-screen   bg-black -mt-16 overflow-x-hidden relative overflow-y-auto">
@@ -104,9 +83,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
           <div className="flex items-center justify-between  gap-4 w-full ">
             <div className="flex items-center gap-4 ">
-              <Button variant="" color="red" size="md" radius="md" onClick={() => handlePlay()}>
-                <Play size={18} className="mx-2" /> Play Now
-              </Button>
+              <VideoModal videoKey={videoKey} />
               <Button variant="light" size="sm" color="teal" radius="md">
                 <BookmarkPlus size={18} className="mx-2" /> Add WatchList
               </Button>

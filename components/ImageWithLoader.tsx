@@ -31,7 +31,7 @@ const ImageWithLoader = ({ src, alt, className, width, height }: Props) => {
         <Image
           src={src}
           alt={alt}
-          className={`transition-all duration-[5000ms] ease-in-out delay-300 ${isLoading ? "opacity-0 " : "opacity-100 "
+          className={`transition-all duration-[5000ms] object-cover  ease-in-out delay-300 ${isLoading ? "opacity-0 " : "opacity-100 "
             }`}
           fill
           onLoad={handleImageLoad}

@@ -11,6 +11,8 @@ import {
 
 import { useZuStore } from "@/store/zuStore";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "@/assets/ns.png"
 
 export default function Header() {
   const { user, updateUser } = useZuStore((state) => state);
@@ -22,8 +24,8 @@ export default function Header() {
         className="flex items-center justify-between gap-10 text-white"
       >
         {/* Logo Section */}
-        <UnstyledButton component={Link} fz={24} href="/">
-          NextStreaming
+        <UnstyledButton component={Link} fz={24} href="/" className="p-0">
+          <Image src={logo} alt="logo" width={120} height={100} className="" />
         </UnstyledButton>
 
         {/* Navigation Section */}
