@@ -14,7 +14,10 @@
     "@mantine/form": "^7.13.2",
     "@mantine/hooks": "^7.13.2",
     "@mantine/modals": "^7.13.2",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@tabler/icons-react": "^3.19.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "lucide-react": "^0.451.0",
@@ -23,6 +26,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.1",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
